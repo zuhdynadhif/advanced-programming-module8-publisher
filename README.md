@@ -19,3 +19,17 @@
 
 #### Create communication between publisher and subscriber on the connection
 ![alt text](images/event-sent.png)
+
+#### Message rates
+![alt text](images/message-chart.png)
+
+spike yang ada pada RabbitMQ management console menunjukkan bahwa message rate yang dikirimkan oleh publisher ke subscriber berjalan dengan baik. Rate awal hingga 4 message per second karena saya melakukan spam cargo run pada console publisher. Setelah itu, message rate berkurang menjadi 1 message per ketika console run dilakukan dalam rentang waktu yang lebih longgar.
+
+Setiap kali publisher program berjalan, ia akan memberikan koneksi ke RabbitMQ melalui url `amqp://guest:guest@localhost:5672`. Kemudian, publisher melakukan publish_event. Flow yang terjadi adalah sebagai berikut:
+
+1. *Connection Established*: Publisher akan membuat koneksi ke RabbitMQ melalui url `amqp://guest:guest@localhost:5672`.
+2. *Message Published*: Publisher akan mengirimkan message ke RabbitMQ dengan memanggil fungsi `publish_event`.
+3. *New Activity on RabbitMQ*: RabbitMQ akan menerima message yang dikirimkan oleh publisher.
+4. *Message Delivered to Subscriber*: Subscriber akan menerima message yang dikirimkan oleh publisher.
+
+Pada saat aktivitas terdeteksi oleh RabbitMQ, maka akan terjadi spike pada grafik message rate yang terdapat pada RabbitMQ management console.
