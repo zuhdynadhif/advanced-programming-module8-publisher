@@ -16,3 +16,6 @@
 
 #### Rabbit MQ
 ![alt text](images/rabbitmq-overview.png)
+
+#### Create communication between publisher and subscriber on the connection
+![alt text](images/event-sent.png)
