@@ -33,3 +33,10 @@ Setiap kali publisher program berjalan, ia akan memberikan koneksi ke RabbitMQ m
 4. *Message Delivered to Subscriber*: Subscriber akan menerima message yang dikirimkan oleh publisher.
 
 Pada saat aktivitas terdeteksi oleh RabbitMQ, maka akan terjadi spike pada grafik message rate yang terdapat pada RabbitMQ management console.
+
+#### Slow rate simulation
+![alt text](images/slow-rate.png)
+
+Terlihat bahwa peak activity menunjukkan angka 20, hal ini disebabkan saya menjalankan program publisher sebanyak 4 kali dimana setiap 1 program mengirimkan 5 buah message, sehingga total message yang dikirimkan adalah 20. 
+
+Selain itu, terlihat bahwa message rate yang dikirimkan oleh publisher ke subscriber terhambat pada angka 1 message per second. Hal ini disebabkan oleh waktu yang dibutuhkan oleh publisher untuk mengirimkan message ke RabbitMQ membutuhkan ten milisecond.
